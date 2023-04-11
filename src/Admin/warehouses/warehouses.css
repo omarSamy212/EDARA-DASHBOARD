@@ -1,0 +1,39 @@
+.cardDesign55 {
+    border-radius: 8px;
+    border: 1px solid #e2e2e2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
+    transition: all linear 200ms;
+    margin-bottom: 10px !important;
+    margin-top: 190px;
+}
+
+
+
+.cardDesign:hover {
+    cursor: pointer;
+    transform: scale(1,1);
+    transform: all linear 200ms;
+    z-index: 1;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card {
+    border: none !important;
+}
+
+.omar00
+{
+
+    padding-top: 50px;
+}
+.parent-card .child-card
+{
+
+bottom: -45%;
+
+}

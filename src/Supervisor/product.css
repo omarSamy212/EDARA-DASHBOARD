@@ -1,0 +1,20 @@
+.cardDesign5
+{
+    border-radius: 8px;
+    border: 1px solid #cccccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
+    transition: all linear 200ms;
+    margin-bottom: 10px !important;
+    margin-top: 190px;
+}
+.parent-card .child-card
+{
+
+bottom: -40%;
+
+}

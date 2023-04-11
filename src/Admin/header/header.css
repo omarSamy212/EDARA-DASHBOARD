@@ -1,0 +1,19 @@
+
+.nav-item1
+{
+  
+background-color: rgb(243, 205, 155);
+font-size: larger; 
+border-radius:7px ;
+color: rgb(255, 255, 255);
+}
+.nav-item 
+{
+    border-radius:7px ;
+    font-size: larger;
+
+}
+.nav-item :hover{
+    border-radius:7px ;
+    background-color:#6096B4
+}
