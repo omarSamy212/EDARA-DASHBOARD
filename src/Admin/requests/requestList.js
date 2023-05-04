@@ -1,18 +1,15 @@
-import { Link } from 'react-router-dom';
-import Footer3 from '../footer/Footer3';
-import {Requests} from "../requests/requests"
-import {REqData} from "../services/reqdata"
+import { Link } from "react-router-dom";
+import Footer3 from "../footer/Footer3";
+import { Requests } from "../requests/requests";
+import { REqData } from "../services/reqdata";
+import { Header } from "../header/header";
 
 export const RequestList = () => {
-
   const requestList = REqData;
- 
 
   return (
-
-
-    <div >
-     <nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
+    <div>
+      {/* <nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -48,23 +45,25 @@ export const RequestList = () => {
       </form>
     </div>
   </div>
-</nav>
-      {
-        requestList.map((item) => {
-          return (
-            
-            <Requests
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              req={item.req}
-          
-            />
-          );
-        })
-      }
-     <Footer3/>
-    </div>
+</nav> */}
 
+      <Header />
+      <Link to={"/H"} style={{ backgroundColor: "#6096B4" }}>
+        <button type="button" className="btn btn-warning m-1">
+          Requests History
+        </button>
+      </Link>
+      {requestList.map((item) => {
+        return (
+          <Requests
+            key={item.id}
+            id={item.id}
+            name={item.name}
+            req={item.req}
+          />
+        );
+      })}
+      <Footer3 />
+    </div>
   );
 };

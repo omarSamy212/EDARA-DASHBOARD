@@ -1,24 +1,19 @@
 import { WarehouseDate } from "../services/WarehouseData";
 import { Warehouses } from "./warehouses";
-import { Link } from 'react-router-dom';
-import '../header/header.css'
-import './warehouseList.css'
+import { Link } from "react-router-dom";
+import "../header/header.css";
+import "./warehouseList.css";
 import Footer1 from "../footer/Footer1";
+import { Header } from "../header/header";
 export const WarehouseList = () => {
-
-
   const warehouse = WarehouseDate;
   const submit = (id) => {
     console.log(`the id is: ${id}`);
-    
   };
- 
+
   return (
-
-    <div class="Omar3" >
-
-
-  <nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
+    <div class="Omar3">
+      {/* <nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -58,31 +53,32 @@ export const WarehouseList = () => {
         </form>
       </div>
     </div>
-  </nav>
+  </nav> */}
 
-    <div class="color">
-    <div class="d-flex flex-wrap justify-content-around container"> 
-      {
-        warehouse.map((item) => {
-          return (
-            <Warehouses
+      <Header />
+      <Link to={"/addw"} style={{ backgroundColor: "#6096B4" }}>
+        <button type="button" className="btn btn-warning m-1">
+          Add Warehouse
+        </button>
+      </Link>
 
-              key={item.id}
-              image={item.image}
-              id={item.id}
-              name={item.name}
-              location={item.location}
-              status={item.status}
-            
-             
-            
+      <div class="color">
+        <div class="d-flex flex-wrap justify-content-around container">
+          {warehouse.map((item) => {
+            return (
+              <Warehouses
+                key={item.id}
+                image={item.image}
+                id={item.id}
+                name={item.name}
+                location={item.location}
+                status={item.status}
               />
-          );
-        })
-      }
-      </div>   
-    </div>
-    <Footer1/>
+            );
+          })}
+        </div>
+      </div>
+      <Footer1 />
     </div>
   );
 };

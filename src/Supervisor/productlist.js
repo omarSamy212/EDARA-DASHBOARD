@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import '../Admin/header/header.css'
 import '../Admin/products/productList.css'
 import Footer1 from '../Admin/footer/Footer1';
-
+import { Header } from '../Admin/header/header';
 
 export const SproductList = () => {
 
@@ -15,7 +15,7 @@ export const SproductList = () => {
   return (<div class="Omar5" >
   
 
-<nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
+{/* <nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -42,8 +42,8 @@ export const SproductList = () => {
       </form>
     </div>
   </div>
-</nav>
-
+</nav> */}
+<Header />
 
 <div class="color">
     <div className="d-flex flex-wrap justify-content-between container">

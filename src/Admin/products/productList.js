@@ -1,19 +1,17 @@
-import { useParams } from 'react-router-dom';
-import {ProductData} from '../services/productData'
-import {Products} from './products'
-import { Link } from 'react-router-dom';
-import '../header/header.css'
-import './productList.css'
-import Footer1 from '../footer/Footer1';
+import { useParams } from "react-router-dom";
+import { ProductData } from "../services/productData";
+import { Products } from "./products";
+import { Link } from "react-router-dom";
+import "../header/header.css";
+import "./productList.css";
+import Footer1 from "../footer/Footer1";
+import { Header } from "../header/header";
 export const ProductList = () => {
-
   const productList = ProductData;
- 
 
-  return (<div class="Omar1" >
-
-
-  <nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
+  return (
+    <div class="Omar1">
+      {/* <nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -57,28 +55,31 @@ export const ProductList = () => {
         </form>
       </div>
     </div>
-  </nav>
+  </nav> */}
 
-  <div class="color">
-    <div className="d-flex flex-wrap justify-content-between container ">
-      {
-        productList.map((item) => {
-          return (
-            
-            <Products
-              key={item.id}
-              id={item.id}
-              name={item.name}
-              Desc={item.Desc}
-              stock={item.stock}
-              image={item.image}
-            />
-          );
-        })
-      }
-    </div>
-    </div>
-    <Footer1/>
+      <Header />
+      <Link to={"/addp"} style={{ backgroundColor: "#6096B4" }}>
+        <button type="button" className="btn btn-warning m-1">
+          Add New Product
+        </button>
+      </Link>
+      <div class="color">
+        <div className="d-flex flex-wrap justify-content-between container ">
+          {productList.map((item) => {
+            return (
+              <Products
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                Desc={item.Desc}
+                stock={item.stock}
+                image={item.image}
+              />
+            );
+          })}
+        </div>
+      </div>
+      <Footer1 />
     </div>
   );
 };

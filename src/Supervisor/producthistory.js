@@ -2,13 +2,14 @@ import '../Supervisor/productHistory.css'
 import { Link } from "react-router-dom";
 import '../Admin/header/header.css'
 import Footer1 from '../Admin/footer/Footer1';
+import { Header } from '../Admin/header/header';
 export const ProductHistory=()=>
 {
 
     return (<div class="gc22" >
 
 
-<nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
+{/* <nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -36,7 +37,9 @@ export const ProductHistory=()=>
       </form>
     </div>
   </div>
-</nav>
+</nav> */}
+
+<Header />
 
 <div  id="hh" >
 <div    class="container py-5 text-white" >

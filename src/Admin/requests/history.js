@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import Footer1 from '../footer/Footer1';
 import '../header/header.css'
 import '../requests/history.css'
+import { Header } from '../header/header';
 export const History=()=>
 {
 
     return (<div class="gc11" >
 
 
-<nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
+{/* <nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -44,9 +45,9 @@ export const History=()=>
       </form>
     </div>
   </div>
-</nav>
+</nav> */}
 
-
+<Header />
 
 
 
