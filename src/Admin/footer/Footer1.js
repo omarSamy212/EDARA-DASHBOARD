@@ -1,7 +1,15 @@
-const Footer1= () => {
-    return  <div className=' w-100 text-center p-3 position-absolute text-white ' style={{ backgroundColor: 'black' }}>
-    © 2023 Copyright : EDARA-DASHBOARED
- 
-  </div>
-    };
-    export default Footer1;
+const Footer1 = () => {
+  return (
+    <div
+      className="w-100 text-center p-3 position-fixed text-white"
+      style={{
+        backgroundColor: "black",
+        bottom: 0,
+      }}
+    >
+      © 2023 Copyright : EDARA-DASHBOARD
+    </div>
+  );
+};
+
+export default Footer1;
