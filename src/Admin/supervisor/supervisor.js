@@ -51,8 +51,18 @@ export const Supervisor = () => {
           err: null,
         });
       })
-      .catch((err) => {});
-  }, []);
+      .catch((err) => {
+        setSupervisors({
+          ...supervisors,
+          loading: false,
+          err: [
+            {
+              msg: err.response.data.message,
+            },
+          ],
+        });
+      });
+  }, [supervisors.update]);
 
   const loadingSpinner = () => {
     return (
@@ -81,7 +91,7 @@ export const Supervisor = () => {
               style={{ marginbottom: -75, marginTop: 5 }}
             >
               <div class="row">
-                <div class="col-lg-7 mx-auto">
+                <div class="col-lg-9 mx-auto">
                   <div class="card border-0 shadow">
                     <div class="card-body p-5">
                       <p class="list">Supervisors List</p>
@@ -89,9 +99,9 @@ export const Supervisor = () => {
                         <table class="table m-0">
                           <thead>
                             <tr>
-                              <th scope="col">Supervisor Id</th>
-                              <th scope="col">Supervisor Name</th>
-                              <th scope="col">Warehouse name</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Email</th>
+                              <th scope="col">Warehouse</th>
 
                               <th scope="col"></th>
                             </tr>
@@ -100,12 +110,12 @@ export const Supervisor = () => {
                             {supervisors.result.map((sp) => {
                               return (
                                 <tr>
-                                  <td>{sp.id}</td>
                                   <td>{sp.username}</td>
+                                  <td>{sp.email}</td>
                                   <td>{sp.warehouses[0].name}</td>
 
                                   <td>
-                                    <Link to={"/addSV"}>
+                                    <Link to={`/upSV/${sp.id}`}>
                                       <button
                                         type="button"
                                         class="btn btn-warning btn-sm"
@@ -113,7 +123,44 @@ export const Supervisor = () => {
                                         Update
                                       </button>
                                     </Link>
+
                                     <button
+                                      onClick={() => {
+                                        setSupervisors({
+                                          ...supervisors,
+                                          loading: true,
+                                          err: null,
+                                        });
+                                        axios
+                                          .delete(
+                                            `http://localhost:4000/api/user/${sp.id}`,
+                                            {
+                                              headers: {
+                                                Authorization: `Bearer ${token}`,
+                                              },
+                                            }
+                                          )
+                                          .then((data) => {
+                                            setSupervisors({
+                                              ...supervisors,
+                                              loading: false,
+                                              err: null,
+                                              update: !supervisors.update,
+                                            });
+                                          })
+                                          .catch((err) => {
+                                            setSupervisors({
+                                              ...supervisors,
+                                              loading: false,
+                                              err: [
+                                                {
+                                                  msg: err.response.data
+                                                    .message,
+                                                },
+                                              ],
+                                            });
+                                          });
+                                      }}
                                       type="button"
                                       class="btn btn-danger btn-sm"
                                       style={{ marginLeft: 20 }}

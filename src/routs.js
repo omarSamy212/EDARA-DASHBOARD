@@ -8,6 +8,7 @@ import { AddWarehouse } from "./Admin/warehouses/addWarehouse";
 import { AddProduct } from "./Admin/products/addProduct";
 import { Supervisor } from "./Admin/supervisor/supervisor";
 import { AddSupervisor } from "./Admin/supervisor/addSupervisor";
+import { UpdateSupervisor } from "./Admin/supervisor/updateSupervisor";
 import { History } from "./Admin/requests/history";
 import { SproductList } from "./Supervisor/productlist";
 import { ProductHistory } from "./Supervisor/producthistory";
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
           {
             path: "/addSV",
             element: <AddSupervisor />,
+          },
+          {
+            path: "/upSV/:id",
+            element: <UpdateSupervisor />,
           },
           {
             path: "/req",
