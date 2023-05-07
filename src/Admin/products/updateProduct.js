@@ -3,11 +3,17 @@ import "../header/header.css";
 import "../products/addProduct.css";
 import Footer1 from "../footer/Footer1";
 import { Header } from "../header/header";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { getAuthToken } from "../../services/auth";
 import axios from "axios";
-export const AddProduct = () => {
-  const { id } = useParams();
+export const UpdateProduct = () => {
+  const { wid, pid } = useParams();
+  const { token, user } = getAuthToken();
+  const [product, setProduct] = useState({
+    loading: true,
+    result: {},
+    err: null,
+  });
 
   const form = useRef({
     name: "",
@@ -15,17 +21,21 @@ export const AddProduct = () => {
     imageUrl: "",
   });
 
-  const { token, user } = getAuthToken();
   const submit = (e) => {
     e.preventDefault();
+    setProduct({ ...product, loading: true });
+    console.log(form.current.name.value);
+    console.log(form.current.quantity.value);
+    console.log(form.current.imageUrl.value);
+
     axios
-      .post(
-        "http://localhost:4000/api/product/",
+      .put(
+        `http://localhost:4000/api/product/${pid}`,
         {
           name: form.current.name.value,
           quantity: form.current.quantity.value,
           imageUrl: form.current.imageUrl.value,
-          warehouseId: id,
+          warehouseId: wid,
         },
         {
           headers: {
@@ -34,11 +44,48 @@ export const AddProduct = () => {
         }
       )
       .then(() => {
-        alert("Product Added successfully");
+        setProduct({ ...product, loading: false });
+        alert("Product updated succesfully");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((errors) => {
+        setProduct({
+          ...product,
+          loading: false,
+          err: errors.response.data.message,
+        });
       });
+  };
+
+  const load_Spinner = () => {
+    return (
+      <div className="container h-100">
+        <div className="row h-100 justify-content-center align-items-center">
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const error = () => {
+    return (
+      <div className="container">
+        <div className="row">
+          {product.err.map((err, index) => {
+            return (
+              <div
+                key={index}
+                className="col-sm-12 alert alert-danger"
+                role="alert"
+              >
+                {err.msg}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
   };
 
   return (

@@ -5,7 +5,9 @@ import { ProductList } from "./Admin/products/productList";
 import { Login } from "./Login/login";
 import { RequestList } from "./Admin/requests/requestList";
 import { AddWarehouse } from "./Admin/warehouses/addWarehouse";
+import { UpWarehouse } from "./Admin/warehouses/updateWarehouse";
 import { AddProduct } from "./Admin/products/addProduct";
+import { UpdateProduct } from "./Admin/products/updateProduct";
 import { Supervisor } from "./Admin/supervisor/supervisor";
 import { AddSupervisor } from "./Admin/supervisor/addSupervisor";
 import { UpdateSupervisor } from "./Admin/supervisor/updateSupervisor";
@@ -40,8 +42,12 @@ export const router = createBrowserRouter([
             element: <WarehouseList />,
           },
           {
-            path: "/addp",
+            path: "/addp/:id",
             element: <AddProduct />,
+          },
+          {
+            path: "/upp/:wid/:pid",
+            element: <UpdateProduct />,
           },
           {
             path: "/SV",
@@ -62,6 +68,10 @@ export const router = createBrowserRouter([
           {
             path: "/addw",
             element: <AddWarehouse />,
+          },
+          {
+            path: "/upw/:id",
+            element: <UpWarehouse />,
           },
         ],
       },

@@ -50,7 +50,7 @@ export const AddSupervisor = () => {
         username: form.current.name.value,
         password: form.current.password.value,
         email: form.current.email.value,
-        warehouseId: form.current.warehouse.value,
+        warehouseId: form.current.warehouse.value !=-1 ? form.current.warehouse.value : null,
       })
       .then(() => {
         setRegister({ ...register, loading: false });

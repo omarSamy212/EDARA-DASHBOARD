@@ -8,8 +8,19 @@ import { Header } from "../header/header";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { getAuthToken } from "../../services/auth";
+
+export const refresh_list = () =>{
+  WarehouseList.setWarehouses({
+    ...WarehouseList.warehouses,
+    loading: false,
+    err: null,
+    update: !WarehouseList.warehouses.update,
+  });
+}
+
 export const WarehouseList = () => {
 
+  
   const { token, user } = getAuthToken();
   const [warehouses, setWarehouses] = useState({
     loading: true,
@@ -55,7 +66,7 @@ export const WarehouseList = () => {
         });
       })
       .catch((err) => {});
-  }, []);
+  }, [warehouses.update]);
 
   const loadingSpinner = () => {
     return (
@@ -69,6 +80,7 @@ export const WarehouseList = () => {
     );
   };
 
+  
   return (
     <div class="Omar3">
       <Header />
