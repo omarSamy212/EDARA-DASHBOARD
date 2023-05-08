@@ -46,23 +46,14 @@ export const RequestList = () => {
     </div>
   </div>
 </nav> */}
-
       <Header />
       <Link to={"/H"} style={{ backgroundColor: "#6096B4" }}>
         <button type="button" className="btn btn-warning m-1">
           Requests History
         </button>
       </Link>
-      {requestList.map((item) => {
-        return (
-          <Requests
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            req={item.req}
-          />
-        );
-      })}
+      
+      <Requests />
       <Footer3 />
     </div>
   );

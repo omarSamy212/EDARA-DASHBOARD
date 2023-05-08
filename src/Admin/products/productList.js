@@ -6,80 +6,106 @@ import "../header/header.css";
 import "./productList.css";
 import Footer1 from "../footer/Footer1";
 import { Header } from "../header/header";
+import { getAuthToken } from "../../services/auth";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 export const ProductList = () => {
+  const { id } = useParams();
   const productList = ProductData;
 
-  return (
-    <div class="Omar1">
-      {/* <nav  id ="navv"class="navbar navbar-expand-lg navbar-dark bg-dark" margin-left='70px'>
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a  class="navbar-brand" href="#">
-      <img src="https://www.freeiconspng.com/thumbs/dashboard-icon/dashboard-icon-3.png" width="35" height="35" class="d-inline-block align-top" ></img>
-      </a>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          
-        <a class="navbar-brand" href="#">EDARA-DASHBOARED</a>
-        
-    
-          <li class="nav-item"> 
-          <Link to={"/addp"}class="nav-link active" aria-current="page" color="white" >Add Prouduct</Link>
-          </li>
+  const { token, user } = getAuthToken();
+  const [products, setProducts] = useState({
+    loading: true,
+    result: [],
+    err: null,
+    update: false,
+  });
 
-          <li class="nav-item">
-          <Link to={"/WH"} class="nav-link active" aria-current="page" color="white"  margin-left="50px">Warehouses</Link>
-          </li>
-         
-          <li class="nav-item">
-            
-          <Link to={"/req"}class="nav-link active" aria-current="page" color="white" >Requests</Link>
-          </li>
-    
-  
-          <li class="nav-item">
-            
-          <Link to={"/SV"}class="nav-link active" aria-current="page" color="white" >Supervisors</Link>
-          </li>
-          
-        <li class="nav-item">
-          <Link to={"/"} class="nav-link active" aria-current="page" color="white"  >Logout</Link>
-          </li>
-  
-        </ul>
-        <form class="d-flex">
-         
-          
-        </form>
-      </div>
-    </div>
-  </nav> */}
-
-      <Header />
-      <Link to={"/addp"} style={{ backgroundColor: "#6096B4" }}>
-        <button type="button" className="btn btn-warning m-1">
-          Add New Product
-        </button>
-      </Link>
-      <div class="color">
-        <div className="d-flex flex-wrap justify-content-between container ">
-          {productList.map((item) => {
+  const error = () => {
+    return (
+      <div className="container">
+        <div className="row">
+          {products.err.map((err, index) => {
             return (
-              <Products
-                key={item.id}
-                id={item.id}
-                name={item.name}
-                Desc={item.Desc}
-                stock={item.stock}
-                image={item.image}
-              />
+              <div
+                key={index}
+                className="col-sm-12 alert alert-danger"
+                role="alert"
+              >
+                {err.msg}
+              </div>
             );
           })}
         </div>
       </div>
-      <Footer1 />
+    );
+  };
+
+  useEffect(() => {
+    setProducts({ ...products, loading: true });
+    axios
+      .get(`http://localhost:4000/api/product/wh-p/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((data) => {
+        setProducts({
+          ...products,
+          result: data.data,
+          loading: false,
+          err: null,
+        });
+      })
+      .catch((err) => {});
+  }, [products.update]);
+
+  const loadingSpinner = () => {
+    return (
+      <div className="container h-100">
+        <div className="row h-100 justify-content-center align-items-center">
+          <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div class="Omar1">
+      <Header />
+      {products.err !== null && error()}
+      {products.loading === true ? (
+        loadingSpinner()
+      ) : (
+        <>
+          <Link to={`/addp/${id}`} style={{ backgroundColor: "#6096B4" }}>
+            <button type="button" className="btn btn-warning m-1">
+              Add New Product
+            </button>
+          </Link>
+          <div class="color">
+            <div className="d-flex flex-wrap justify-content-between container ">
+              {products.result.map((item) => {
+                console.log(products.result);
+                return (
+                  <Products
+                    key={item.id}
+                    id={item.id}
+                    name={item.name}
+                    stock={item.quantity}
+                    image={item.imageUrl}
+                  />
+                );
+              })}
+            </div>
+          </div>
+          <Footer1 />
+        </>
+      )}
+      ;
     </div>
   );
 };

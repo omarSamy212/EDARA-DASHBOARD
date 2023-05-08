@@ -108,11 +108,12 @@ export const Supervisor = () => {
                           </thead>
                           <tbody>
                             {supervisors.result.map((sp) => {
+                              console.log(sp);
                               return (
                                 <tr>
                                   <td>{sp.username}</td>
                                   <td>{sp.email}</td>
-                                  <td>{sp.warehouses[0].name}</td>
+                                  <td>{ sp.warehouses.length > 0 ? sp.warehouses[0].name: sp.warehouse}</td>
 
                                   <td>
                                     <Link to={`/upSV/${sp.id}`}>

@@ -5,7 +5,9 @@ import { ProductList } from "./Admin/products/productList";
 import { Login } from "./Login/login";
 import { RequestList } from "./Admin/requests/requestList";
 import { AddWarehouse } from "./Admin/warehouses/addWarehouse";
+import { UpWarehouse } from "./Admin/warehouses/updateWarehouse";
 import { AddProduct } from "./Admin/products/addProduct";
+import { UpdateProduct } from "./Admin/products/updateProduct";
 import { Supervisor } from "./Admin/supervisor/supervisor";
 import { AddSupervisor } from "./Admin/supervisor/addSupervisor";
 import { UpdateSupervisor } from "./Admin/supervisor/updateSupervisor";
@@ -14,6 +16,7 @@ import { SproductList } from "./Supervisor/productlist";
 import { ProductHistory } from "./Supervisor/producthistory";
 import { Header } from "./Admin/header/header";
 import { AuthGuard } from "./guards/auth-guard";
+import { StockRequest } from "./Supervisor/stockrequest";
 
 export const router = createBrowserRouter([
   {
@@ -40,8 +43,12 @@ export const router = createBrowserRouter([
             element: <WarehouseList />,
           },
           {
-            path: "/addp",
+            path: "/addp/:id",
             element: <AddProduct />,
+          },
+          {
+            path: "/upp/:wid/:pid",
+            element: <UpdateProduct />,
           },
           {
             path: "/SV",
@@ -63,6 +70,10 @@ export const router = createBrowserRouter([
             path: "/addw",
             element: <AddWarehouse />,
           },
+          {
+            path: "/upw/:id",
+            element: <UpWarehouse />,
+          },
         ],
       },
 
@@ -71,8 +82,16 @@ export const router = createBrowserRouter([
         element: <AuthGuard roles={["supervisor"]} />,
         children: [
           {
-            path: "/supervisor-home",
+            path: "/supervisor-home/:wid/:sid",
             element: <SproductList />,
+          },
+          {
+            path: "/sq/:pid/:uid/:cq",
+            element: <StockRequest />,
+          },
+          {
+            path: "/PH/:uid",
+            element: <ProductHistory />,
           },
         ],
       },
@@ -93,11 +112,6 @@ export const router = createBrowserRouter([
           {
             path: "/H",
             element: <History />,
-          },
-
-          {
-            path: "/PH",
-            element: <ProductHistory />,
           },
         ],
       },
