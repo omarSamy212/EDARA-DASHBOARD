@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getAuthToken, removeAuthToken } from "../../services/auth";
 
 export const Header = () => {
   const { token, user } = getAuthToken();
+  const{wid,sid} = useParams();
+
   const navigate = useNavigate();
   return (
     <>
@@ -94,7 +96,7 @@ export const Header = () => {
               {user && user.userType === "supervisor" && (
                 <li class="nav-item">
                   <Link
-                    to={"/PH"}
+                    to={`/PH/${user.id}`}
                     class="nav-link active"
                     aria-current="page"
                     color="white"

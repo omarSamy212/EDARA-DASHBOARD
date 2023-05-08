@@ -35,10 +35,12 @@ export const Login = (props) => {
         if (user.userType === "admin") {
           navigate("/admin-home");
         } else if (user.userType === "supervisor") {
-          navigate("/supervisor-home");
+          navigate(`/supervisor-home/${user.warehouseId}/${user.id}`);
         }
 
         console.log(user.userType);
+        console.log(user.id);
+        console.log(user.warehouseId);
         // console.log(user.email);
       })
       .catch((errors) => {

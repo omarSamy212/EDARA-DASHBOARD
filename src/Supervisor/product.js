@@ -1,6 +1,7 @@
+import { Link, useParams } from "react-router-dom";
 
 export const Product = (props) => {
-
+const {wid, sid} = useParams();
     return (
  
 
@@ -12,7 +13,6 @@ export const Product = (props) => {
           <img className="card-img-top" src={props.image} alt=""/>
           <div className="card-body"class=" p-1 text-center position-relative parent-card">
             <h4 className="card-name text-center">{props.name}</h4>
-            <span className="card-text">{props.Desc} </span> 
             <div class="grid">
             <span className="card-text">Quantity : {props.stock}</span>
             </div>
@@ -20,8 +20,7 @@ export const Product = (props) => {
     
             <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group child-card">
               <div class="d-grid gap-1 w-100 mt-4">
-              <label class="btn btn-dark" for="btncheck1">Increase Quantity</label>
-              <label class="btn btn-dark" for="btncheck2">Decrease Quantity</label>
+              <Link to={`/sq/${props.id}/${sid}/${props.stock}`} class="btn btn-dark" for="btncheck1">Send Stock Request</Link>
             </div>
             </div>
           

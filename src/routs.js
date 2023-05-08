@@ -16,6 +16,7 @@ import { SproductList } from "./Supervisor/productlist";
 import { ProductHistory } from "./Supervisor/producthistory";
 import { Header } from "./Admin/header/header";
 import { AuthGuard } from "./guards/auth-guard";
+import { StockRequest } from "./Supervisor/stockrequest";
 
 export const router = createBrowserRouter([
   {
@@ -81,8 +82,16 @@ export const router = createBrowserRouter([
         element: <AuthGuard roles={["supervisor"]} />,
         children: [
           {
-            path: "/supervisor-home",
+            path: "/supervisor-home/:wid/:sid",
             element: <SproductList />,
+          },
+          {
+            path: "/sq/:pid/:uid/:cq",
+            element: <StockRequest />,
+          },
+          {
+            path: "/PH/:uid",
+            element: <ProductHistory />,
           },
         ],
       },
@@ -103,11 +112,6 @@ export const router = createBrowserRouter([
           {
             path: "/H",
             element: <History />,
-          },
-
-          {
-            path: "/PH",
-            element: <ProductHistory />,
           },
         ],
       },
